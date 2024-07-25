@@ -28,6 +28,8 @@ import kotlinx.coroutines.launch
 import java.util.concurrent.Executors
 import androidx.compose.foundation.verticalScroll
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Bitmap
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -37,6 +39,9 @@ import androidx.compose.ui.text.font.FontStyle
 import sendFrameToGeminiAI
 import java.util.Locale
 import kotlin.math.abs
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.ui.input.pointer.pointerInput
+
 
 @Composable
 fun BlindModeScreen() {
@@ -57,7 +62,8 @@ fun BlindModeScreen() {
     val tts = remember { mutableStateOf<TextToSpeech?>(null) }
     var lastSpokenIndex by remember { mutableStateOf(0) }
     var lastProcessedTimestamp by remember { mutableStateOf(0L) }
-    val frameInterval = 6000 // Process a frame every 2 seconds
+    val frameInterval = 5500 // Process a frame every 5.5 seconds
+    var navigationPaused by remember { mutableStateOf(false) }
 
     LaunchedEffect(context) {
         tts.value = TextToSpeech(context) { status ->
@@ -75,7 +81,7 @@ fun BlindModeScreen() {
     }
 
     if (hasPermission) {
-        if (sessionStarted) {
+        if (sessionStarted && !navigationPaused) {
             CameraPreviewWithAnalysis { imageProxy ->
                 val currentTimestamp = System.currentTimeMillis()
                 if (currentTimestamp - lastProcessedTimestamp >= frameInterval) {
@@ -98,7 +104,6 @@ fun BlindModeScreen() {
                     imageProxy.close()  // Ensure the imageProxy is closed here
                 }
             }
-
         }
     } else {
         ActivityCompat.requestPermissions(
@@ -109,7 +114,20 @@ fun BlindModeScreen() {
     }
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onDoubleTap = {
+                        navigationPaused = !navigationPaused
+                        if (navigationPaused) {
+                            tts.value?.speak("Navigation paused", TextToSpeech.QUEUE_FLUSH, null, null)
+                        } else {
+                            tts.value?.speak("Navigation resumed", TextToSpeech.QUEUE_FLUSH, null, null)
+                        }
+                    }
+                )
+            }
     ) {
         if (showPopup) {
             Box(
@@ -174,6 +192,9 @@ fun BlindModeScreen() {
         }
     }
 }
+
+
+
 
 @Composable
 fun CameraPreviewWithAnalysis(onImageCaptured: (ImageProxy) -> Unit) {
