@@ -85,9 +85,11 @@ fun BlindModeScreen() {
         tts.value = TextToSpeech(context) { status ->
             if (status != TextToSpeech.ERROR) {
                 tts.value?.language = Locale.US
+                tts.value?.setSpeechRate(1.25f) // Adjust the value to control the speed
             }
         }
     }
+
 
     DisposableEffect(Unit) {
         onDispose {
