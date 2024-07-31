@@ -70,7 +70,7 @@ fun BlindModeScreen() {
     val tts = remember { mutableStateOf<TextToSpeech?>(null) }
     var lastSpokenIndex by remember { mutableStateOf(0) }
     var lastProcessedTimestamp by remember { mutableStateOf(0L) }
-    val frameInterval = 500 // Process a frame every .5 seconds
+    val frameInterval = 1300 // Process a frame every 1.3 seconds
     var navigationPaused by remember { mutableStateOf(false) }
     var isMicActive by remember { mutableStateOf(false) }
     var isBookActive by remember { mutableStateOf(false) }
@@ -392,7 +392,7 @@ fun AIResponseOverlay(response: String, chatResponse: String, tts: TextToSpeech?
     // Skip to the next sentence every 20 seconds
     LaunchedEffect(Unit) {
         while (true) {
-            delay(20000) // Wait for 20 seconds
+            delay(12000) // Wait for 12 seconds
             if (isConnected && sentences.isNotEmpty()) {
                 currentIndex = (currentIndex + 1) % sentences.size
                 val newText = sentences[currentIndex].trim()
