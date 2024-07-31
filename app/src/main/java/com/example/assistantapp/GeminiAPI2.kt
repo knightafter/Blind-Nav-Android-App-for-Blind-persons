@@ -11,11 +11,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException
 
-val generativeModel = GenerativeModel(
+val ReadModel = GenerativeModel(
     modelName = "gemini-1.5-flash",
     apiKey = "AIzaSyAu9uYZF2SNNMSkZrH89I0mqnigkPKiuPA",
     generationConfig = generationConfig {
-        temperature = 1f
+        temperature = 0.2f
         topK = 64
         topP = 0.95f
         maxOutputTokens = 8192
@@ -25,16 +25,17 @@ val generativeModel = GenerativeModel(
 
     )
 
-suspend fun sendFrameToGeminiAI(bitmap: Bitmap, onPartialResult: (String) -> Unit, onError: (String) -> Unit) {
+// Function to send frames to Gemini 2 for reading purposes
+suspend fun sendFrameToGemini2AI(bitmap: Bitmap, onPartialResult: (String) -> Unit, onError: (String) -> Unit) {
     try {
         withContext(Dispatchers.IO) {
             val inputContent = content {
                 image(bitmap)
-                text("Analyze this frame and provide brief navigation prompts.")
+                text("Read the text from this image and provide the content.")
             }
 
             var fullResponse = ""
-            generativeModel.generateContentStream(inputContent).collect { chunk ->
+            ReadModel.generateContentStream(inputContent).collect { chunk ->
                 chunk.text?.let {
                     fullResponse += it
                     onPartialResult(it)
@@ -47,17 +48,5 @@ suspend fun sendFrameToGeminiAI(bitmap: Bitmap, onPartialResult: (String) -> Uni
     } catch (e: Exception) {
         Log.e("GeminiAI", "Unexpected error: ${e.message}")
         onError("Unexpected error: ${e.message}")
-    }
-}
-
-fun ImageProxy.toBitmap(): Bitmap? {
-    return try {
-        val buffer = this.planes[0].buffer
-        val bytes = ByteArray(buffer.remaining())
-        buffer.get(bytes)
-        BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-    } catch (e: Exception) {
-        Log.e("ImageProxy", "Error converting ImageProxy to Bitmap: ${e.message}")
-        null
     }
 }

@@ -41,9 +41,11 @@ import androidx.compose.ui.text.font.FontStyle
 import java.util.Locale
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.filled.Mic
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
+import kotlinx.coroutines.delay
 
 @Composable
 fun BlindModeScreen() {
@@ -68,9 +70,11 @@ fun BlindModeScreen() {
     val tts = remember { mutableStateOf<TextToSpeech?>(null) }
     var lastSpokenIndex by remember { mutableStateOf(0) }
     var lastProcessedTimestamp by remember { mutableStateOf(0L) }
-    val frameInterval = 5500 // Process a frame every 5git .5 seconds
+    val frameInterval = 500 // Process a frame every .5 seconds
     var navigationPaused by remember { mutableStateOf(false) }
     var isMicActive by remember { mutableStateOf(false) }
+    var isBookActive by remember { mutableStateOf(false) }
+    var tapCount by remember { mutableStateOf(0) }
     var chatResponse by remember { mutableStateOf("") }
 
     val speechRecognizer = remember { SpeechRecognizer.createSpeechRecognizer(context) }
@@ -85,11 +89,10 @@ fun BlindModeScreen() {
         tts.value = TextToSpeech(context) { status ->
             if (status != TextToSpeech.ERROR) {
                 tts.value?.language = Locale.US
-                tts.value?.setSpeechRate(1.25f) // Adjust the value to control the speed
+                tts.value?.setSpeechRate(1.5f)
             }
         }
     }
-
 
     DisposableEffect(Unit) {
         onDispose {
@@ -146,6 +149,18 @@ fun BlindModeScreen() {
         }
     }
 
+    // Effect to handle long press for book icon activation
+    LaunchedEffect(isBookActive) {
+        if (isBookActive) {
+            navigationPaused = true
+            tts.value?.speak("Reading mode activated.", TextToSpeech.QUEUE_FLUSH, null, null)
+            // Initialize Gemini 2 model for reading purposes here
+        } else {
+            navigationPaused = false
+            tts.value?.speak("Reading mode deactivated.", TextToSpeech.QUEUE_FLUSH, null, null)
+        }
+    }
+
     if (hasPermission) {
         if (sessionStarted && !navigationPaused) {
             CameraPreviewWithAnalysis { imageProxy ->
@@ -154,14 +169,25 @@ fun BlindModeScreen() {
                     coroutineScope.launch {
                         val bitmap = imageProxy.toBitmap()
                         if (bitmap != null) {
-                            sendFrameToGeminiAI(bitmap, { partialResult ->
-                                analysisResult += " $partialResult"
-                                val newText = analysisResult.substring(lastSpokenIndex)
-                                tts.value?.speak(newText, TextToSpeech.QUEUE_ADD, null, null)
-                                lastSpokenIndex = analysisResult.length
-                            }, { error ->
-                                // Handle error here
-                            })
+                            if (isBookActive) {
+                                // Use Gemini 2 AI for reading
+                                sendFrameToGemini2AI(bitmap, { partialResult ->
+                                    chatResponse += " $partialResult"
+                                    tts.value?.speak(partialResult, TextToSpeech.QUEUE_ADD, null, null)
+                                }, { error ->
+                                    // Handle error here
+                                })
+                            } else {
+                                // Use Gemini 1 AI for navigation
+                                sendFrameToGeminiAI(bitmap, { partialResult ->
+                                    analysisResult += " $partialResult"
+                                    val newText = analysisResult.substring(lastSpokenIndex)
+                                    tts.value?.speak(newText, TextToSpeech.QUEUE_ADD, null, null)
+                                    lastSpokenIndex = analysisResult.length
+                                }, { error ->
+                                    // Handle error here
+                                })
+                            }
                             lastProcessedTimestamp = currentTimestamp
                         }
                         imageProxy.close()
@@ -171,6 +197,7 @@ fun BlindModeScreen() {
                 }
             }
         }
+
     } else {
         ActivityCompat.requestPermissions(
             (context as Activity),
@@ -191,6 +218,9 @@ fun BlindModeScreen() {
                         } else {
                             tts.value?.speak("Navigation resumed", TextToSpeech.QUEUE_FLUSH, null, null)
                         }
+                    },
+                    onLongPress = {
+                        isBookActive = !isBookActive
                     }
                 )
             }
@@ -256,10 +286,19 @@ fun BlindModeScreen() {
                     AIResponseOverlay(response = analysisResult, chatResponse = chatResponse, tts = tts.value, lastSpokenIndex = lastSpokenIndex)
                 }
                 Icon(
+                    imageVector = Icons.Filled.Book,
+                    contentDescription = "Book Icon",
+                    modifier = Modifier
+                        .align(Alignment.CenterStart)
+                        .size(64.dp)
+                        .clickable { /* Handle book icon click if needed */ },
+                    tint = if (isBookActive) Color.Green else Color(0xFFB0B1B1)
+                )
+                Icon(
                     imageVector = Icons.Filled.Mic,
                     contentDescription = "Mic Icon",
                     modifier = Modifier
-                        .align(Alignment.Center)
+                        .align(Alignment.CenterEnd)
                         .size(64.dp),
                     tint = if (isMicActive) Color.Green else Color(0xFFB0B1B1)
                 )
@@ -267,8 +306,6 @@ fun BlindModeScreen() {
         }
     }
 }
-
-
 
 
 
@@ -339,11 +376,40 @@ fun isInternetAvailable(context: Context): Boolean {
 @Composable
 fun AIResponseOverlay(response: String, chatResponse: String, tts: TextToSpeech?, lastSpokenIndex: Int) {
     val context = LocalContext.current
-    val isConnected = remember { mutableStateOf(isInternetAvailable(context)) }
+    var isConnected by remember { mutableStateOf(isInternetAvailable(context)) }
+    var currentIndex by remember { mutableStateOf(lastSpokenIndex) } // Track the current sentence index
+    val sentences = response.split(".") // Split the response into sentences
+    var lastSpokenText by remember { mutableStateOf("") } // Track the last spoken text
+
+    // Continuously check internet connectivity
+    LaunchedEffect(Unit) {
+        while (true) {
+            isConnected = isInternetAvailable(context)
+            delay(5000) // Check every 5 seconds
+        }
+    }
+
+    // Skip to the next sentence every 20 seconds
+    LaunchedEffect(Unit) {
+        while (true) {
+            delay(20000) // Wait for 20 seconds
+            if (isConnected && sentences.isNotEmpty()) {
+                currentIndex = (currentIndex + 1) % sentences.size
+                val newText = sentences[currentIndex].trim()
+                if (newText.isNotEmpty() && newText != lastSpokenText) {
+                    tts?.speak(newText, TextToSpeech.QUEUE_FLUSH, null, null)
+                    lastSpokenText = newText
+                }
+            }
+        }
+    }
 
     LaunchedEffect(response) {
-        val newText = response.substring(lastSpokenIndex)
-        tts?.speak(newText, TextToSpeech.QUEUE_ADD, null, null)
+        val newText = sentences[currentIndex].trim()
+        if (newText.isNotEmpty() && newText != lastSpokenText) {
+            tts?.speak(newText, TextToSpeech.QUEUE_ADD, null, null)
+            lastSpokenText = newText
+        }
     }
 
     Column(
@@ -353,34 +419,27 @@ fun AIResponseOverlay(response: String, chatResponse: String, tts: TextToSpeech?
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (!isConnected.value) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-                    .background(Color(0x88000000))
-                    .padding(16.dp),
-                contentAlignment = Alignment.Center
-            ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
+                .background(Color(0x88000000))
+                .padding(16.dp),
+            contentAlignment = Alignment.TopStart
+        ) {
+            if (!isConnected) {
                 Text(
                     text = "You are not connected to the internet",
                     color = Color.Red,
                     fontSize = 20.sp,
                     modifier = Modifier
-
+                        .align(Alignment.Center)
                         .padding(8.dp)
                 )
-                tts?.speak("You are not connected to the internet", TextToSpeech.QUEUE_FLUSH, null, null)
-            }
-        } else {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-                    .background(Color(0x88000000))
-                    .padding(16.dp),
-                contentAlignment = Alignment.TopStart
-            ) {
+                LaunchedEffect(isConnected) {
+                    tts?.speak("You are not connected to the internet", TextToSpeech.QUEUE_FLUSH, null, null)
+                }
+            } else {
                 val scrollState = rememberScrollState()
                 Column(
                     modifier = Modifier
@@ -404,7 +463,6 @@ fun AIResponseOverlay(response: String, chatResponse: String, tts: TextToSpeech?
                             fontSize = 16.sp,
                             fontStyle = FontStyle.Italic,
                             modifier = Modifier
-
                                 .padding(8.dp)
                         )
                     }

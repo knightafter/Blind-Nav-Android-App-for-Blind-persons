@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -34,10 +35,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import java.util.*
+import androidx.compose.ui.platform.LocalHapticFeedback
+
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun MainPage(navController: NavHostController) {
+    val haptic = LocalHapticFeedback.current
     val context = LocalContext.current
     var isSettingsVisible by remember { mutableStateOf(false) }
     var tts by remember { mutableStateOf<TextToSpeech?>(null) }
@@ -76,7 +80,10 @@ fun MainPage(navController: NavHostController) {
         )
 
         ElevatedCard(
-            onClick = { navController.navigate("blindMode") },
+            onClick = {
+                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                navController.navigate("blindMode")
+                      },
             elevation = CardDefaults.cardElevation(defaultElevation = 12.dp),
             modifier = Modifier
                 .offset(y = cardOffset)
@@ -119,6 +126,7 @@ fun MainPage(navController: NavHostController) {
                     .clip(CircleShape)
                     .background(Color.LightGray)
                     .clickable {
+                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                         isSettingsVisible = !isSettingsVisible
                         if (isSettingsVisible) {
                             tts?.speak(

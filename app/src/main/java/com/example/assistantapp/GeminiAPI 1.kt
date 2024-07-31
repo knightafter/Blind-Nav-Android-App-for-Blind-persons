@@ -9,7 +9,7 @@ import kotlinx.coroutines.*
 
 val model = GenerativeModel(
     modelName = "gemini-1.5-flash",
-    apiKey = "Your-API-Key",
+    apiKey = "AIzaSyAu9uYZF2SNNMSkZrH89I0mqnigkPKiuPA",
     generationConfig = generationConfig {
         temperature = 1f
         topK = 64
@@ -17,27 +17,9 @@ val model = GenerativeModel(
         maxOutputTokens = 8192
         responseMimeType = "text/plain"
     },
-    systemInstruction = content { text("""
-        You are an AI assistant designed to help visually impaired users with their queries and provide context-aware assistance. Your role is to:
+    systemInstruction = content { text("user user's are impaired persons when they ask you about there souroundings then you have to tell them and if they ask you about anything or any general question you also have to answer that and help the user as much possible as you can. \nkeep your answer short really short jsut give the user main idea that this is the answer do not explain it much.") },
 
-        1. Answer user questions about their environment and provide helpful information.
-        2. Use the context from the navigation system (AI 1) to provide more accurate and relevant responses.
-        3. Keep responses concise and easy to understand for audio playback.
-        4. Prioritize user safety and provide practical advice.
-        5. Be empathetic and supportive in your interactions.
-
-        When responding:
-        - Use the frame data provided to understand the user's current environment.
-        - Provide clear, actionable advice when appropriate.
-        - If you're unsure about something, state it clearly and avoid making assumptions.
-        - Encourage the user to rely on their other senses and assistive devices when relevant.
-
-        Remember, your responses will be read aloud to the user, so clarity and brevity are essential.
-        
-        when user ask to you that who you are and who makes you then you have to tell that I am specially designed and 
-        developed by the Blind Nav company to help impared persons
-    """) },
-)
+    )
 
 val chatHistory = listOf<Content>()
 
