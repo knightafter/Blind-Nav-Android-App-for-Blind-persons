@@ -123,7 +123,7 @@ fun BlindModeScreen() {
         tts.value = TextToSpeech(context) { status ->
             if (status != TextToSpeech.ERROR) {
                 tts.value?.language = Locale.US
-                tts.value?.setSpeechRate(1.37f) // Increase the speech rate
+                tts.value?.setSpeechRate(1.4f) // Increase the speech rate
             }
         }
     }
