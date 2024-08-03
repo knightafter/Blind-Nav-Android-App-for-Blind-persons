@@ -26,7 +26,8 @@ val model = GenerativeModel(
         SafetySetting(HarmCategory.SEXUALLY_EXPLICIT, BlockThreshold.NONE),
         SafetySetting(HarmCategory.DANGEROUS_CONTENT, BlockThreshold.NONE),
     ),
-    systemInstruction = content { text("user user's are impaired persons when they ask you about there souroundings then you have to tell them and if they ask you about anything or any general question you also have to answer that and help the user as much possible as you can. \nkeep your answer short really short jsut give the user main idea that this is the answer do not explain it much.") },
+    systemInstruction = content { text(
+        "the data about the users sourounding will be shared with you so if user ask you about anything about his sourounding so you have tell him about like if the user ask how many trees are there so you have to tell him or if the user asks about if the road is paved or unpaved or if the user asks about the specfic things color.\nuser user's are impaired persons when they ask you about there souroundings then you have to tell them and if they ask you about anything or any general question you also have to answer that and help the user as much possible as you can. \nkeep your answer short really short jsut give the user main idea that this is the answer do not explain it much.") },
 
     )
 
