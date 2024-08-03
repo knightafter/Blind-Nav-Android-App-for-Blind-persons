@@ -74,14 +74,7 @@ import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-/*
-TODO: IN THIS FILE CURRENTLY I HAVE TO ADD THAT WHEN THE USER IS IN THE ASSISTANT MODE THEN IF He LONG PRESSES THE SCREEN THE USER SHOULD RESTRICTED
-FROM ENTERING TO THE READING MODE AND
-CURRENTLY WILE THE USER IS IN THE READING MODE THE TEXT FROM THE IMAGE COMES IN THE OVERLAY BUT WHEN AGAIN USER GOES TO THE NAVIGATION MODE THE
-OVERLAY SHOULD NOW PRESENT THE TEXT OF THE NAVOGATION MODE BUT ITS NOT LIKE THAT THE READING MODE TEXT STAYS. SO I HAVE TO CHANGE THIS THING THIS
-THING IS IS PERFECTLY HAPPENS WHEN THE USER IS IN THE ASSISTANT MODE.
 
- */
 
 @Composable
 fun BlindModeScreen() {
@@ -111,7 +104,7 @@ fun BlindModeScreen() {
     val tts = remember { mutableStateOf<TextToSpeech?>(null) }
     var lastSpokenIndex by remember { mutableStateOf(0) }
     var lastProcessedTimestamp by remember { mutableStateOf(0L) }
-    val frameInterval = 5500 // Process a frame every 5.5 seconds
+    val frameInterval = 5000 // Process a frame every 5 seconds
     var navigationPaused by remember { mutableStateOf(false) }
     var isMicActive by remember { mutableStateOf(false) }
     var chatResponse by remember { mutableStateOf("") }
@@ -130,7 +123,7 @@ fun BlindModeScreen() {
         tts.value = TextToSpeech(context) { status ->
             if (status != TextToSpeech.ERROR) {
                 tts.value?.language = Locale.US
-                tts.value?.setSpeechRate(1.4f) // Increase the speech rate
+                tts.value?.setSpeechRate(1.37f) // Increase the speech rate
             }
         }
     }
