@@ -1,8 +1,11 @@
 package com.example.assistantapp
 
 import com.google.ai.client.generativeai.GenerativeModel
+import com.google.ai.client.generativeai.type.BlockThreshold
 import com.google.ai.client.generativeai.type.Content
 import com.google.ai.client.generativeai.type.GenerationConfig
+import com.google.ai.client.generativeai.type.HarmCategory
+import com.google.ai.client.generativeai.type.SafetySetting
 import com.google.ai.client.generativeai.type.content
 import com.google.ai.client.generativeai.type.generationConfig
 import kotlinx.coroutines.*
@@ -17,6 +20,12 @@ val model = GenerativeModel(
         maxOutputTokens = 8192
         responseMimeType = "text/plain"
     },
+    safetySettings = listOf(
+        SafetySetting(HarmCategory.HARASSMENT, BlockThreshold.NONE),
+        SafetySetting(HarmCategory.HATE_SPEECH, BlockThreshold.NONE),
+        SafetySetting(HarmCategory.SEXUALLY_EXPLICIT, BlockThreshold.NONE),
+        SafetySetting(HarmCategory.DANGEROUS_CONTENT, BlockThreshold.NONE),
+    ),
     systemInstruction = content { text("user user's are impaired persons when they ask you about there souroundings then you have to tell them and if they ask you about anything or any general question you also have to answer that and help the user as much possible as you can. \nkeep your answer short really short jsut give the user main idea that this is the answer do not explain it much.") },
 
     )
