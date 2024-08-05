@@ -104,7 +104,7 @@ fun BlindModeScreen() {
     val tts = remember { mutableStateOf<TextToSpeech?>(null) }
     var lastSpokenIndex by remember { mutableStateOf(0) }
     var lastProcessedTimestamp by remember { mutableStateOf(0L) }
-    val frameInterval = 5000 // Process a frame every 5 seconds
+    val frameInterval = 6500 // Process a frame every 6.5 seconds
     var navigationPaused by remember { mutableStateOf(false) }
     var isMicActive by remember { mutableStateOf(false) }
     var chatResponse by remember { mutableStateOf("") }
@@ -255,13 +255,13 @@ fun BlindModeScreen() {
                                 tts.value?.stop()
                                 currentMode = "assistant"
                                 overlayText = ""
-                                tts.value?.speak("Navigation paused. Assistant mode activated.", TextToSpeech.QUEUE_FLUSH, null, null)
+                                tts.value?.speak("Assistant mode activated.", TextToSpeech.QUEUE_FLUSH, null, null)
                             } else {
                                 tts.value?.stop()
                                 currentMode = "navigation"
                                 overlayText = ""
                                 chatResponse = ""
-                                tts.value?.speak("Navigation resumed. Assistant mode deactivated.", TextToSpeech.QUEUE_FLUSH, null, null)
+                                tts.value?.speak("Assistant mode deactivated.", TextToSpeech.QUEUE_FLUSH, null, null)
                             }
                         }
                     },
@@ -523,10 +523,10 @@ fun AIResponseOverlay(
         }
     }
 
-    // Skip to the next sentence every 20 seconds
+    // Skip to the next sentence every 8 seconds
     LaunchedEffect(Unit) {
         while (true) {
-            delay(10000) // Wait for 20 seconds
+            delay(8000) // Wait for 8 seconds
             if (isConnected.value && sentences.isNotEmpty()) {
                 currentIndex = (currentIndex + 1) % sentences.size
                 val newText = sentences[currentIndex].trim()
