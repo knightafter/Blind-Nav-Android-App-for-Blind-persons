@@ -39,7 +39,7 @@ environment like but is the color of the car which i am facing color of the bott
 3️⃣ **Reading Mode** : Reading mode is an mode which will help the user in reading anything like sign-boards or books etc.
 
 
-<img src="Downloads/WhatsApp Image 2024-08-10 at 2.31.58 PM (1).jpeg" alt="Example Image" width="100">
+<img src="C:\Users\Ahad\Downloads\WhatsApp Image 2024-08-10 at 2.31.58 PM (1).jpeg" alt="Example Image" width="100">
 
 
 
