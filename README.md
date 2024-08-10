@@ -47,7 +47,7 @@ environment like but is the color of the car which i am facing color of the bott
 
 ⭕ for the setup of this app we just need 1️⃣ third part Dependency which is Gemini AI API key which is doing all our main work so this is mandatory.
 
-🔎 you just have to clone the repository from the github and then just open the Android Studio and in the following files just add your API Key (GeminiAI.kt, GeminiAI 1.kt, GeminiAI 2.kt).
+🔎 you just have to clone the repository from the github and then just open the Android Studio and in the following files (GeminiAI.kt, GeminiAI 1.kt, GeminiAI 2.kt) just add your API Key.
 
 
 👉To get the Gemini API key just go to the following(https://ai.google.dev/) link and just get your API key you do not have to make an new model as I already did you just need your API key.
