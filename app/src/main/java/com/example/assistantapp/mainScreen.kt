@@ -210,7 +210,7 @@ fun MainPage(navController: NavHostController) {
                         append("You can also visit the ")
                         pushStringAnnotation(
                             tag = "URL",
-                            annotation = "https://www.youtube.com/watch?v=_9prH7NFmLI"
+                            annotation = "https://www.youtube.com/watch?v=GD4iuPCIXTc&t=116s"
                         )
                         withStyle(
                             style = SpanStyle(
