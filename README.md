@@ -36,12 +36,12 @@ environment like but is the color of the car which i am facing color of the bott
 ![WhatsApp Image 2024-08-10 at 2 30 28 PM](https://github.com/user-attachments/assets/69757d25-c2aa-40ad-942f-7ae92e2855f5)
 
 
-3️⃣ **Reading Mode** : Reading mode is an mode which will help the user in reading anything like sign-boards or books etc.
+3️⃣ **Reading Mode** : Reading mode is a mode which will help the user in reading anything like sign-boards or books etc.
 
 
 
 
-<img src="https://imgur.com/a/6U1WOQz" alt="Example Image" width="100">
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/6U1WOQz" data-context="false" ><a href="//imgur.com/a/6U1WOQz"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 
 
