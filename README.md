@@ -1,4 +1,4 @@
-﻿# Blind-Nav---Android-App-for-Blind-persons
+![WhatsApp Image 2024-08-10 at 2 31 58 PM (1)](https://github.com/user-attachments/assets/9c4ca482-856d-464e-864b-c181adaf7cdf)﻿# Blind-Nav---Android-App-for-Blind-persons
 
   ### ⭕ Blind Nav is an Android Application which helps the Blind people to navigate their surroundings and Environment just with the help of their Camera and the Internet.
  
@@ -39,7 +39,8 @@ environment like but is the color of the car which i am facing color of the bott
 3️⃣ **Reading Mode** : Reading mode is an mode which will help the user in reading anything like sign-boards or books etc.
 
 
-![WhatsApp Image 2024-08-10 at 2 31 58 PM (1)](https://github.com/user-attachments/assets/adc5154f-4d3e-4807-bd7e-23925542a76c)
+<img src="/Users/Ahad/Downloads/WhatsApp%20Image%202024-08-10%20at%202.31.58%20PM%20(1).jpeg" alt="Example Image" width="200">
+
 
 
 
