@@ -23,7 +23,8 @@ This app has the 3 main features.
 1️⃣ **Navigation Mode**: when the app is opened and the new session has been created then first Navigation Mode will be opened which will help the users in Navigation.
 
 
-![2](https://github.com/user-attachments/assets/11888c38-f9fe-4306-9b60-7a3251151bba)
+
+![Uploading WhatsApp Image 2024-08-10 at 12.17.19 AM (2).jpeg…]()
 
 
 
@@ -67,6 +68,8 @@ environment like but is the color of the car which i am facing color of the bott
 
 🛑ok kindly do your collaborations and also let me know that how good app is and are the improvements that are needed
 
+
+# LICENSE
 
 MIT License
 
