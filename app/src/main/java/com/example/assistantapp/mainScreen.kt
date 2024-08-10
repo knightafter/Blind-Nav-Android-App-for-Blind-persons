@@ -182,35 +182,22 @@ fun MainPage(navController: NavHostController) {
                         .padding(16.dp)
                 ) {
                     val annotatedText = buildAnnotatedString {
-                        append("To Master the navigation through this App, follow these instructions below 😎.\n\n")
+                        append(" ⭕ To Master the navigation through this App, follow these instructions below 😎.\n\n")
                         withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                            append("Double Tap ")
+                            append("1️⃣ Double Tap ")
                         }
                         append("on the Navigation screen to ")
                         withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                            append("stop ")
+                            append("Enter")
                         }
-                        append("the Navigation or ")
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                            append("vice versa.\n")
-                        }
-                        append("Right after, speak any query about ")
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                            append("anything or the environment around you.\n")
-                        }
-                        append("You also can use your ")
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                            append("earbuds / airpods ")
-                        }
-                        append("by ")
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                            append("double-tapping ")
-                        }
-                        append("to stop or resume the navigation.\n\n")
+                        append(" in the Assistant Mode ⚡. and again double tap to exit the Navigation mode. \n\n")
+
+                        append("2️⃣ While in Navigation Mode long press the screen enter the reading mode ☝ . \n\n")
+
                         append("You can also visit the ")
                         pushStringAnnotation(
                             tag = "URL",
-                            annotation = "https://www.youtube.com/watch?v=_9prH7NFmLI"
+                            annotation = "https://www.youtube.com/watch?v=GD4iuPCIXTc&t=116s"
                         )
                         withStyle(
                             style = SpanStyle(

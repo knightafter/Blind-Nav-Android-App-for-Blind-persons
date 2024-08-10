@@ -12,7 +12,7 @@ import kotlinx.coroutines.*
 
 val model = GenerativeModel(
     modelName = "gemini-1.5-flash",
-    apiKey = "AIzaSyAu9uYZF2SNNMSkZrH89I0mqnigkPKiuPA",
+    apiKey = "YOUR-API-KEY",
     generationConfig = generationConfig {
         temperature = 1.5f
         topK = 64
@@ -26,7 +26,7 @@ val model = GenerativeModel(
         SafetySetting(HarmCategory.SEXUALLY_EXPLICIT, BlockThreshold.NONE),
         SafetySetting(HarmCategory.DANGEROUS_CONTENT, BlockThreshold.NONE),
     ),
-    systemInstruction = content { text("your user is a blind person.\nthe data of the users souroundings will be shared with you so you have to answer users question as what he asks. \n") },
+    systemInstruction = content { text("your user is a blind person.\nthe data of the users souroundings will be shared with you so you have to answer users question as what he asks. \nbesides it if user asks you any questions about anything so you also have to answer that.\n") },
 
 
     )
