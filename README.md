@@ -3,10 +3,7 @@
   ### ⭕ Blind Nav is an Android Application which helps the Blind people to navigate their surroundings and Environment just with the help of their Camera and the Internet.
  
 
-     ![WhatsApp Image 2024-08-10 at 2 22 13 PM](https://github.com/user-attachments/assets/2d9c82a4-a9d7-4d7c-afdf-b60a28861929)
-
-
-     ![WhatsApp Image 2024-08-10 at 12 17 19 AM (2)](https://github.com/user-attachments/assets/33a85426-adc5-4048-a284-44fd513d1886)
+    ![1](https://github.com/user-attachments/assets/b55143ac-98ff-4c34-a27c-3f409998e59f)
 
 
 
@@ -26,22 +23,25 @@ This app has the 3 main features.
 1️⃣ **Navigation Mode**: when the app is opened and the new session has been created then first Navigation Mode will be opened which will help the users in Navigation.
 
 
-![WhatsApp Image 2024-08-10 at 2 30 28 PM (1)](https://github.com/user-attachments/assets/3ed4afe1-5b34-4370-b1a6-fdff37eeb18d)
+![2](https://github.com/user-attachments/assets/11888c38-f9fe-4306-9b60-7a3251151bba)
+
 
 
 2️⃣ **Assistant Mode** : By double tap in the Navigation Mode then the Assistant Mode will be activated and the purpose of the Assistant Mode is that user can ask any question about its 
 environment like but is the color of the car which i am facing color of the bottle how is the weather and any specific thing or any common thing also like what is world bank etc.
 
 
-![WhatsApp Image 2024-08-10 at 2 30 28 PM](https://github.com/user-attachments/assets/69757d25-c2aa-40ad-942f-7ae92e2855f5)
+
+![3](https://github.com/user-attachments/assets/150214b9-3d79-43d6-9107-b308434cd91e)
 
 
 3️⃣ **Reading Mode** : Reading mode is a mode which will help the user in reading anything like sign-boards or books etc.
 
 
+![4](https://github.com/user-attachments/assets/2037617e-d0c2-497a-a0ad-41472889a0e4)
 
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/6U1WOQz" data-context="false" ><a href="//imgur.com/a/6U1WOQz"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
 
 
 
