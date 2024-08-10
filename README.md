@@ -1,14 +1,8 @@
 ﻿# Blind-Nav---Android-App-for-Blind-persons
 
-     
-
-       
-
-                  ![WhatsApp Image 2024-08-10 at 2 22 13 PM](https://github.com/user-attachments/assets/7f1ab7e8-0489-457e-aef7-d150c18ee423)
+     ![WhatsApp Image 2024-08-10 at 2 22 13 PM](https://github.com/user-attachments/assets/2d9c82a4-a9d7-4d7c-afdf-b60a28861929)
 
 
-                                                                          
-                  ![WhatsApp Image 2024-08-10 at 12 17 19 AM (3)](https://github.com/user-attachments/assets/08ceaee8-dfd4-4b10-817b-480a412cb27e)  
 
                   
 
