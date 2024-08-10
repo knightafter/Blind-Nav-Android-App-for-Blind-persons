@@ -1,6 +1,13 @@
 ﻿# Blind-Nav---Android-App-for-Blind-persons
 
+  ### ⭕ Blind Nav is an Android Application which helps the Blind people to navigate their surroundings and Environment just with the help of their Camera and the Internet.
+ 
+
      ![WhatsApp Image 2024-08-10 at 2 22 13 PM](https://github.com/user-attachments/assets/2d9c82a4-a9d7-4d7c-afdf-b60a28861929)
+
+
+     ![WhatsApp Image 2024-08-10 at 12 17 19 AM (2)](https://github.com/user-attachments/assets/33a85426-adc5-4048-a284-44fd513d1886)
+
 
 
 
