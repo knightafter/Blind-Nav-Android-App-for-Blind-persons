@@ -24,7 +24,7 @@ This app has the 3 main features.
 
 
 
-2️⃣ **Assistant Mode** : By double tap in the Navigation Mode then the Assistant Mode will be activated and the purpose of the Assistant Mode is that user can ask any question about its 
+2️⃣ **Assistant Mode**: By double tap in the Navigation Mode then the Assistant Mode will be activated and the purpose of the Assistant Mode is that user can ask any question about its 
 environment like but is the color of the car which i am facing color of the bottle how is the weather and any specific thing or any common thing also like what is world bank etc.
 
 
