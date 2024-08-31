@@ -25,14 +25,14 @@ This app has the 3 main features.
 
 
 2️⃣ **Assistant Mode**: By double tap in the Navigation Mode then the Assistant Mode will be activated and the purpose of the Assistant Mode is that user can ask any question about its 
-environment like but is the color of the car which i am facing color of the bottle how is the weather and any specific thing or any common thing also like what is world bank etc.
+environment is like, what is the color of the car,  Color of the bottle, how is the weather and any specific thing. users can also ask about anyother things like who is Elon Musk.
 
 
 
 ![3](https://github.com/user-attachments/assets/150214b9-3d79-43d6-9107-b308434cd91e)
 
 
-3️⃣ **Reading Mode** : Reading mode is a mode which will help the user in reading anything like sign-boards or books etc.
+3️⃣ **Reading Mode** : Reading mode is a mode which will help the user in reading sign-boards or books etc. It's basic feature is to read the text on anything.
 
 
 ![4](https://github.com/user-attachments/assets/2037617e-d0c2-497a-a0ad-41472889a0e4)
