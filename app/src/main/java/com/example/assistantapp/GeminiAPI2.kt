@@ -16,7 +16,7 @@ import java.io.IOException
 
 val ReadModel = GenerativeModel(
     modelName = "gemini-1.5-flash",
-    apiKey = "YOUR-API-KEY",
+    apiKey = "Your API Key",
     generationConfig = generationConfig {
         temperature = 0.2f
         topK = 64
