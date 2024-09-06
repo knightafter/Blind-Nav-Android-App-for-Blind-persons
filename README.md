@@ -73,7 +73,7 @@ environment is like, what is the color of the car,  Color of the bottle, how is 
 
 MIT License
 
-Copyright (c) 2024 Ahad Naseer
+Copyright (c) 2024 Muhammad Ahad Naseer
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
